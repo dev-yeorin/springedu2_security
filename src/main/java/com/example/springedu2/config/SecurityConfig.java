@@ -27,10 +27,16 @@ public class SecurityConfig {
                     ).authenticated() // 로그인이 필요함
                     .anyRequest().authenticated() // 설정하지 않은 다른 요청도 로그인 필요
             )
+                //formLogin() 는 사용자가 <form>으로 입력한  username, password를 기반으로 인증 처리
                 .formLogin( form->form.loginPage("/login"))
-                .logout(logout-> logout.logoutUrl("/logout"))
+                // get /login -> PageController 에 /login 주소 이동 -> login.html 로 보낸다
+                // 내가 만든 로그인 화면 사용
+                .logout(logout-> logout.logoutUrl("/logout")) // 생략 가능
+                // post /login
+                // Spring Security 가 username, password 읽어서 인증 처리한다 : 자동
                 .exceptionHandling(exception-> exception.accessDeniedPage("/accessDenied")
                 ); // 접근 거부 페이지 처리
+        return http.build();
     }
 
     // 비밀번호를 암호화
