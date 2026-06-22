@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>내 정보</title>
+  <link rel="stylesheet" href="/css/visitor.css" />
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .box {
+      width: 420px;
+      background: white;
+      padding: 40px;
+      border-radius: 24px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+    }
+
+    h2 {
+      margin: 0 0 32px;
+      font-size: 28px;
+      font-weight: 700;
+      text-align: center;
+      color: #222;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .error {
+      min-height: 18px;
+      display: block;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 20px;
+      color: #444;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      margin-top: 8px;
+      padding: 14px 16px;
+      border: none;
+      border-radius: 12px;
+      background: #f1f5f9;
+      box-sizing: border-box;
+      font-size: 15px;
+    }
+
+    input:focus {
+      outline: none;
+      background: #eef2ff;
+    }
+
+    .error {
+      display: block;
+      margin-top: 6px;
+      font-size: 13px;
+      color: #ef4444;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .btn-primary {
+      flex: 1;
+      height: 50px;
+      border: none;
+      border-radius: 12px;
+      background: #6366f1;
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    .btn-secondary {
+      flex: 1;
+      height: 50px;
+      border-radius: 12px;
+      background: #f1f5f9;
+      color: #475569;
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+<div class="box">
+  <h2>내 정보</h2>
+  <p class="msg" th:if="${msg}" th:text="${msg}"></p>
+  <p> 아이디: <strong th:text="${member.username}"></strong></p>
+  <p> 권한:  <strong th:text="${member.role}"></strong></p>
+
+  <form th:action="@{/members/me}" method="post" th:object="${memberForm}">
+    <div class="error" th:if="${#fields.hasGlobalErrors()}"
+         th:each="err: ${#fields.hasGlobalErrors()}"
+         th:text="${err}"></div>
+
+    <label>아이디
+      <input type="text" th:field="*{username}" placeholder="4자 이상" required>
+      <span class="error" th:errors="*{username}"></span>
+    </label>
+
+
+    <label>이메일
+      <input type="email" th:field="*{email}" placeholder="120자까지" required>
+      <span class="error" th:errors="*{email}"></span>
+    </label>
+
+    <label>새 비밀번호
+      <input type="password" th:field="*{password}" placeholder="변경하지 않으려면 비워 두세요" >
+      <span class="error" th:errors="*{password}"></span>
+    </label>
+
+    <button type="submit">내 정보 수정</button>
+    <a th:href="@{/visitorMain.html}"><button type="button">방명록으로</button></a>
+    <a th:if="@{isAdmin}" th:href="@{/admin/members}"><button type="button">회원관리</button></a>
+
+  </form>
+</div>
+</body>
+</html>

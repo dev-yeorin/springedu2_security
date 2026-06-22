@@ -1,6 +1,5 @@
 package com.example.springedu2.dto;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -9,17 +8,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MemberCreateForm {
+public class MemberUpdateForm {
 
     // @NotBlank : NULL, ""(빈문자열), "   "(공백문자열)
-    @NotBlank(message = "아이디는 필수입니다")
-    @Size(min = 4, max = 30, message = "아이디는 4~30자로 입력하세요")
-    private String username;
-
-    @NotBlank(message = "비밀번호는 필수입니다")
-    @Size(min=4,max=100, message = "비밀번호는 4자이상 입력하세요")
-    private String password;
-
     @NotBlank(message = "이름은 필수입니다")
     @Size(max = 50, message = "이름은 30자 이내로 입력하세요")
     private String name;
@@ -29,6 +20,11 @@ public class MemberCreateForm {
     @Size(max = 120, message = "이메일은 120자 이내로 입력하세요")
     private String email;
 
-    private String role = "USER";
+    @Size(max = 100, message = "비밀번호는 100자 이내로 입력하세요")
+    private String  password;
+
+    private String  role = "USER";
+    private boolean enabled = true;
+
 
 }
