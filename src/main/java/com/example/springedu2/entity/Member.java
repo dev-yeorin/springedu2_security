@@ -1,6 +1,10 @@
 package com.example.springedu2.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,8 +12,9 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
+// @Entity -> db table
 @Entity
-@Table
+@Table(name="members") // table 이름 변경
 @Getter
 @Setter
 @NoArgsConstructor
