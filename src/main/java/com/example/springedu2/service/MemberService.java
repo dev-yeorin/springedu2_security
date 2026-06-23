@@ -78,7 +78,7 @@ public class MemberService implements UserDetailsService {
 
     // 회원가입
     @Transactional
-    private Member create(MemberCreateForm memberForm) {
+    public Member create(MemberCreateForm memberForm) {
         // 기존회원인지 조회
         validNewMember(memberForm.getUsername(), memberForm.getEmail());
 
