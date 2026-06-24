@@ -22,18 +22,20 @@ public class MemberCreateForm {
     private String password;
 
     @NotBlank(message = "이름은 필수입니다")
-
     @Size(max = 50, message = "이름은 30자 이내로 입력하세요")
     private String name;
 
     @NotBlank(message = "이메일은 필수입니다")
     @Email(message = "이메일 형식으로 입력하세요.")
-    @Pattern( // jakarta
-            regexp = "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$]",
-            message = "이메일 도메인에는 . 이 포함되어야 합니다.")
+    @Pattern(  // jakarta
+            regexp = "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+            message = "이메일 도메인에는 . 이 포함되어야 합니다."
+    )
     @Size(max = 120, message = "이메일은 120자 이내로 입력하세요")
     private String email;
 
     private String role = "USER";
 
 }
+
+

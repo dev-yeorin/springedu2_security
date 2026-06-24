@@ -87,7 +87,7 @@ public class MemberService implements UserDetailsService {
         member.setPassword( passwordEncoder.encode( memberForm.getPassword() ) );
         member.setName( memberForm.getName() );
         member.setEmail( memberForm.getEmail() );
-        member.setRole( parseRole( member.getRole().name() ) );
+        member.setRole( parseRole( memberForm.getRole() ) );
         member.setEnabled( true );
         return  memberRepository.save( member );
 
@@ -147,5 +147,14 @@ public class MemberService implements UserDetailsService {
         }
 
         return member;
+    }
+
+    // 회원 삭제
+    public void delete(Long id, String name) {
+        Member member = findById(id);
+        if (member.getUsername().equals(name)) {
+            throw new IllegalArgumentException("현재 로그인한 자신은 삭제할 수 없습니다");
+        }
+        memberRepository.deleteById(id);
     }
 }
